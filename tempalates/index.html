@@ -5,8 +5,50 @@
     <title>Title</title>
 </head>
 <body>
-<h1>Новая страница</h1>
-{{ a }}
-<h1>{{ text }}</h1>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+<form action="{% url 'thanks_page' %}" method="POST">
+    {% csrf_token %}
+    <label>Имя</label>
+    <input name="name">
+    <label>Телефон</label>
+    <input name="phone"/>
+    <button type="submit">ОТПРАВИТЬ</button>
+</form>
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+{% if object_list %}
+<table border="1">
+    <tr>
+        <th>Id</th>
+        <th>Дата</th>
+        <th>Имя</th>
+        <th>Телефон</th>
+    </tr>
+    {% for obj in object_list %}
+    <tr>
+        <th>{{ obj.id }}</th>
+        <th>{{ obj.order_dt }}</th>
+        <th>{{ obj.order_name }}</th>
+        <th>{{ obj.order_phone }}</th>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+Нет данных
+{% endif %}
 </body>
 </html>
